@@ -1,48 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Night Fall Reader</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body{
-margin:0;
-background:black;
-text-align:center;
-font-family:Arial;
-color:white;
-}
-
-img{
-width:100%;
-max-width:900px;
-display:block;
-margin:0 auto 10px auto;
-}
-
-.topbar{
-background:#111;
-padding:12px;
-position:sticky;
-top:0;
-}
-
-.topbar a{
-color:#a855f7;
-text-decoration:none;
-}
-</style>
-</head>
-
-<body>
-
-<div class="topbar">
-<a href="index.html">← Back</a>
-</div>
-
-<div id="content"></div>
-
 <script>
-
 const params = new URLSearchParams(window.location.search);
 const series = params.get("series");
 const chapter = params.get("chapter");
@@ -53,7 +9,11 @@ let page = 1;
 
 function loadPage(){
     const img = new Image();
-    img.src = `chapters/${series}/ch${chapter}/page${page}.jpg`;
+
+    // adds leading zero (01, 02, 03...)
+    const formattedPage = page.toString().padStart(2, '0');
+
+    img.src = `Loan-Shark-King/Chapter-01/${formattedPage}.webp`;
 
     img.onload = function(){
         img.style.width = "100%";
@@ -62,7 +22,7 @@ function loadPage(){
         img.style.margin = "0 auto 10px auto";
         content.appendChild(img);
         page++;
-        loadPage(); // load next page
+        loadPage();
     };
 
     img.onerror = function(){
@@ -71,8 +31,7 @@ function loadPage(){
 }
 
 loadPage();
-
 </script>
 
-</body>
-</html>
+
+    
